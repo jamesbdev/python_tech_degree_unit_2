@@ -31,13 +31,11 @@ def balance_teams():
   bandits = [full_team[i] for i in range(6, 12)]
   warriors = [full_team[i] for i in range(12, 18)]
   return panthers, bandits, warriors
-#display team's name
-# total number of players on that team
-# player's names on that team
+
 
 teams = balance_teams()
 
-
+# function that creates the menu
 def create_menu():
    print("Basketball team stats tool \n *** Menu *** \n Here are your choices: \n A) Display team stats \n B) Quit")
    first_option = input("Enter an option  ")
@@ -77,12 +75,19 @@ def showPlayerName(team):
 
 #function to display the team stats
 def display_stats(team):
-   #how to show the team name?
-   print("Total Players: ", len(team))
+   num_of_players = len(team)
+   print("Total Players: ", num_of_players)
    #Loop through team and display names
-   print("Players on the team:")
 
-#display_stats(constants.PLAYERS)
+   print("Players on the team: ")
+   # get list of names 
+   player_names = showPlayerName(team)
+   # loop through list of names to output each player's name
+   for i in range(num_of_players -1 ):
+      print(player_names[i], end = ", ")
+   print(player_names[num_of_players -1])
+  
+
 
 if __name__ == "__main__":
     clean_data(constants.PLAYERS)
