@@ -1,9 +1,6 @@
 import constants
 import copy
 
-teams = constants.TEAMS 
-players = constants.PLAYERS
-
 
 #function to clean the Players data
 def clean_data(list):
@@ -48,15 +45,15 @@ def create_menu():
       teams = balance_teams()
       if team_choice.lower() == "a":
         #display stats of Panthers
-        print("Panthers Stats \n-----------")
+        print("Team: Panthers Stats \n-----------")
         display_stats(teams[0])
       elif team_choice.lower() == "b":
         #display stats of Bandits
-        print("Bandits Stats \n----------")
+        print("Team: Bandits Stats \n----------")
         display_stats(teams[1])
       elif team_choice.lower() == "c": 
         #display stats of Warriors
-        print("Warriors stats \n----------")
+        print("Team: Warriors stats \n----------")
         display_stats(teams[2])
       else:
         print("Sorry please choose an option between A, B and C")
