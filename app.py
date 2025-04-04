@@ -18,15 +18,15 @@ def clean_data(list):
     #return the new list
     return players_copy
 
-#balance teams function
+# balance teams function
 # adds equal amount of players to the 3 teams
 # creates a variable for each team
 def balance_teams():
-  num_players_team = len(constants.PLAYERS) / len(constants.TEAMS)
+  num_players_teams = int(len(constants.PLAYERS) / len(constants.TEAMS))
   full_team = clean_data(constants.PLAYERS)
-  panthers = [full_team[i] for i in range(6)]
-  bandits = [full_team[i] for i in range(6, 12)]
-  warriors = [full_team[i] for i in range(12, 18)]
+  panthers = [full_team[i] for i in range(num_players_teams)]
+  bandits = [full_team[i] for i in range(num_players_teams, num_players_teams * 2)]
+  warriors = [full_team[i] for i in range(num_players_teams * 2, num_players_teams * 3)]
   return panthers, bandits, warriors
 
 
@@ -62,7 +62,7 @@ def create_menu():
    # Display team stats that the user picked
    print("Press Enter to continue")
 
-#loops through a team and outputs the player names in a list
+#helper function to store players names in a list
 def showPlayerName(team):
   player_names = []
   for player in team:
@@ -70,7 +70,7 @@ def showPlayerName(team):
 
   return player_names
 
-#function to display the team stats
+#helper function to display the team stats
 def display_stats(team):
    num_of_players = len(team)
    print("Total Players: ", num_of_players)
