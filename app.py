@@ -45,19 +45,23 @@ def create_menu():
    # Ask user to pick team A, B or C
    if first_option.lower() == "a":
       #display_stats()
-      print("A) Panthers \n B) Bandits \n C) Warriors")
+      print("A) Panthers \nB) Bandits \nC) Warriors")
       team_choice = input("Enter an option  ")
       teams = balance_teams()
       if team_choice.lower() == "a":
         #display stats of Panthers
-        print("Panthers \n ------ Stats")
+        print("Panthers Stats \n-----------")
         display_stats(teams[0])
       elif team_choice.lower() == "b":
         #display stats of Bandits
+        print("Bandits Stats \n----------")
         display_stats(teams[1])
-      else: 
+      elif team_choice.lower() == "c": 
         #display stats of Warriors
+        print("Warriors stats \n----------")
         display_stats(teams[2])
+      else:
+        print("Sorry please choose an option between A, B and C")
       
       
    # Display team stats that the user picked
@@ -74,7 +78,6 @@ def showPlayerName(team):
 #function to display the team stats
 def display_stats(team):
    #how to show the team name?
-   print(team, "stats \n ----------")
    print("Total Players: ", len(team))
    #Loop through team and display names
    print("Players on the team:")
