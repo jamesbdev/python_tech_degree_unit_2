@@ -15,6 +15,7 @@ def clean_data(list):
          dictionary['experience'] = True
       else:
          dictionary['experience'] = False
+      dictionary['guardians'] = dictionary['guardians'].split('and')
     #return the new list
     return players_copy
 
