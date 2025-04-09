@@ -24,10 +24,36 @@ def clean_data(list):
 # creates a variable for each team
 def balance_teams():
   num_players_teams = int(len(constants.PLAYERS) / len(constants.TEAMS))
+  
   full_team = clean_data(constants.PLAYERS)
-  panthers = [full_team[i] for i in range(num_players_teams)]
-  bandits = [full_team[i] for i in range(num_players_teams, num_players_teams * 2)]
-  warriors = [full_team[i] for i in range(num_players_teams * 2, num_players_teams * 3)]
+  experienced_players = []
+  unexperienced_players = []
+
+
+ 
+  for player in full_team:
+     if player['experience'] == True:
+        experienced_players.append(player)
+     else:
+        unexperienced_players.append(player)
+  
+  # divide experienced players equally in the three teams
+
+  panthers = [experienced_players[i] for i in range(0, 3 )]
+  bandits = [experienced_players[i] for i in range(3, 6)]
+  warriors = [experienced_players[i] for i in range(6, 9)]
+  
+  # add unexperienced players evenly between the three teams
+  for player in unexperienced_players:
+     if len(panthers) < num_players_teams:
+        panthers.append(player)
+     elif len(bandits) < num_players_teams:
+        bandits.append(player)
+     else:
+        warriors.append(player)
+  
+  print(panthers)
+  # add functionality to balance teams taking into account experience
   return panthers, bandits, warriors
 
 
@@ -35,24 +61,24 @@ teams = balance_teams()
 
 # function that creates the menu
 def create_menu():
-   print("Basketball team stats tool \n *** Menu *** \n Here are your choices: \n A) Display team stats \n B) Quit")
+   print("Basketball team stats tool \n *** Menu *** \n Here are your choices: \n 1) Display team stats \n 2) Quit")
    first_option = input("Enter an option  ")
-   # if user chooses A - display teams names
-   # Ask user to pick team A, B or C
-   if first_option.lower() == "a":
+   # if user chooses 1 - display teams names
+   # Ask user to pick team 1, 2 or 3
+   if first_option == "1":
       #display_stats()
-      print("A) Panthers \nB) Bandits \nC) Warriors")
+      print("1) Panthers \n2) Bandits \n3) Warriors")
       team_choice = input("Enter an option  ")
       teams = balance_teams()
-      if team_choice.lower() == "a":
+      if team_choice == "1":
         #display stats of Panthers
         print("Team: Panthers Stats \n-----------")
         display_stats(teams[0])
-      elif team_choice.lower() == "b":
+      elif team_choice == "2":
         #display stats of Bandits
         print("Team: Bandits Stats \n----------")
         display_stats(teams[1])
-      elif team_choice.lower() == "c": 
+      elif team_choice == "3": 
         #display stats of Warriors
         print("Team: Warriors stats \n----------")
         display_stats(teams[2])
@@ -74,8 +100,22 @@ def showPlayerName(team):
 #helper function to display the team stats
 def display_stats(team):
    num_of_players = len(team)
+   num_of_experienced_players = 0
+   num_of_inexperienced_players = 0
+   average_height = calculate_avg_height(team)
+
+   for player in team:
+      if player['experience'] == True:
+         num_of_experienced_players += 1
+      else:
+         num_of_inexperienced_players += 1
+      
+         
    print("Total Players: ", num_of_players)
    #Loop through team and display names
+   print("total inexperienced players", num_of_inexperienced_players)
+   print("total experienced players", num_of_experienced_players)
+   print(f"The average player's height is {average_height} inches")
 
    print("Players on the team: ")
    # get list of names 
@@ -84,10 +124,24 @@ def display_stats(team):
    for i in range(num_of_players -1 ):
       print(player_names[i], end = ", ")
    print(player_names[num_of_players -1])
+ 
   
+
+#helper function to calculate the average player height
+def calculate_avg_height(team):
+   # get players height
+   heights = []
+   for player in team:
+      heights.append(player['height'])
+   player_avg_height = sum(heights) / len(heights)
+   return player_avg_height
+   # make average calculation 
+   # return average height
+   
 
 
 if __name__ == "__main__":
     clean_data(constants.PLAYERS)
     balance_teams()
     create_menu()
+    
