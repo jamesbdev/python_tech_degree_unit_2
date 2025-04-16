@@ -109,8 +109,7 @@ def display_stats(team):
          num_of_experienced_players += 1
       else:
          num_of_inexperienced_players += 1
-      
-         
+            
    print("Total Players: ", num_of_players)
    #Loop through team and display names
    print("total inexperienced players", num_of_inexperienced_players)
@@ -124,8 +123,27 @@ def display_stats(team):
    for i in range(num_of_players -1 ):
       print(player_names[i], end = ", ")
    print(player_names[num_of_players -1])
+   guardians = []
+   flattened_list = []
+   print("Guardians:")
+   for player in team: 
+      guardians.append(player['guardians'])
+   for guardian in guardians:
+     flattened_list.extend(guardian)
+   
+   #Remove white space from guardian flattened list
+   stripped_list = [item.strip() for item in flattened_list]
+
+   # Join the list in a comma separated string
+   guardians_string = ', '.join(stripped_list)
+   print(guardians_string)
+
  
-  
+def display_guardians(team):
+   guardians = []
+   for player in team:
+      guardians.append(player['guardians'])
+   print(guardians) 
 
 #helper function to calculate the average player height
 def calculate_avg_height(team):
@@ -144,4 +162,5 @@ if __name__ == "__main__":
     clean_data(constants.PLAYERS)
     balance_teams()
     create_menu()
+    
     
