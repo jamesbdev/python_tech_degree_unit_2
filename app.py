@@ -60,6 +60,7 @@ teams = balance_teams()
 
 # function that creates the menu
 def create_menu():
+   has_exited = False
    print("BASKETBALL TEAM STATS TOOL \n \n ******* Menu ******** \n \n Here are your choices: \n \n 1) Display team stats \n 2) Quit \n")
    first_option = input("Enter an option  ")
    # if user chooses 1 - display teams names
@@ -84,13 +85,12 @@ def create_menu():
       else:
         print("Sorry please choose an option between A, B and C")
    elif first_option == "2":
-      player_quit = True
       print("user has quit")
-      return player_quit
-      #return player_quit
-   
-   # Display team stats that the user picked
+      return True
+
    print("Press Enter to continue")
+   return False
+ 
 
 #helper function to store players names in a list
 def showPlayerName(team):
@@ -164,9 +164,10 @@ def calculate_avg_height(team):
 
 if __name__ == "__main__":
     clean_data(constants.PLAYERS)
-    balance_teams()    
-    while create_menu() != True:
-      create_menu()
+    balance_teams()
+    player_quit = False    
+    while not player_quit:
+     player_quit = create_menu()
     
    
     
