@@ -29,8 +29,6 @@ def balance_teams():
   experienced_players = []
   unexperienced_players = []
 
-
- 
   for player in full_team:
      if player['experience'] == True:
         experienced_players.append(player)
@@ -51,17 +49,18 @@ def balance_teams():
         bandits.append(player)
      else:
         warriors.append(player)
-  
-  print(panthers)
   # add functionality to balance teams taking into account experience
   return panthers, bandits, warriors
 
 
 teams = balance_teams()
 
+# Set a variable to track if user wants to quit
+#player_quit = False
+
 # function that creates the menu
 def create_menu():
-   print("Basketball team stats tool \n *** Menu *** \n Here are your choices: \n 1) Display team stats \n 2) Quit")
+   print("BASKETBALL TEAM STATS TOOL \n \n ******* Menu ******** \n \n Here are your choices: \n \n 1) Display team stats \n 2) Quit \n")
    first_option = input("Enter an option  ")
    # if user chooses 1 - display teams names
    # Ask user to pick team 1, 2 or 3
@@ -84,8 +83,12 @@ def create_menu():
         display_stats(teams[2])
       else:
         print("Sorry please choose an option between A, B and C")
-      
-      
+   elif first_option == "2":
+      player_quit = True
+      print("user has quit")
+      return player_quit
+      #return player_quit
+   
    # Display team stats that the user picked
    print("Press Enter to continue")
 
@@ -102,7 +105,7 @@ def display_stats(team):
    num_of_players = len(team)
    num_of_experienced_players = 0
    num_of_inexperienced_players = 0
-   average_height = calculate_avg_height(team)
+   average_height = round(calculate_avg_height(team), 2)
 
    for player in team:
       if player['experience'] == True:
@@ -114,7 +117,7 @@ def display_stats(team):
    #Loop through team and display names
    print("total inexperienced players", num_of_inexperienced_players)
    print("total experienced players", num_of_experienced_players)
-   print(f"The average player's height is {average_height} inches")
+   print(f"The average player's height is {average_height} inches \n")
 
    print("Players on the team: ")
    # get list of names 
@@ -123,6 +126,7 @@ def display_stats(team):
    for i in range(num_of_players -1 ):
       print(player_names[i], end = ", ")
    print(player_names[num_of_players -1])
+   print("\n")
    guardians = []
    flattened_list = []
    print("Guardians:")
@@ -160,7 +164,10 @@ def calculate_avg_height(team):
 
 if __name__ == "__main__":
     clean_data(constants.PLAYERS)
-    balance_teams()
-    create_menu()
+    balance_teams()    
+    while create_menu() != True:
+      create_menu()
+    
+   
     
     
