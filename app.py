@@ -83,7 +83,7 @@ def create_menu():
         print("Team: Warriors stats \n----------")
         display_stats(teams[2])
       else:
-        print("Sorry please choose an option between A, B and C")
+        print("Sorry please choose an option between 1, 2 and 3")
    elif first_option == "2":
       print("user has quit")
       return True
